@@ -77,6 +77,21 @@ module.exports = generators.Base.extend({
         name: 'authoremail',
         message: 'Your email',
         default: this.authoremail
+      }, {
+        type: 'checkbox',
+        name: 'badges',
+        message: 'Badges',
+        choices: [
+          {name: 'npm downloads', value: 'npmd'},
+          {name: 'npm version', value: 'npmv'},
+          {name: 'npm license', value: 'npml'},
+          {name: 'travis build', value: 'travis-build'},
+          {name: 'codecov coverage', value: 'codecov'},
+          {name: 'github fork', value: 'gforks'},
+          {name: 'github stars', value: 'gstars'},
+          {name: 'github watchers', value: 'gwatchers'},
+          {name: 'github followers', value: 'gfollowers'},
+        ]
       }
     ]).then(function (answers) {
       this.appname = answers.appname;
@@ -86,6 +101,7 @@ module.exports = generators.Base.extend({
       this.githubuser = answers.githubuser;
       this.authorname = answers.authorname;
       this.authoremail = answers.authoremail;
+      this.badges = answers.badges;
     }.bind(this));
   },
   
@@ -97,12 +113,12 @@ module.exports = generators.Base.extend({
       "license": this.license,
       "githubuser": this.githubuser,
       "authorname": this.authorname,
-      "authoremail": this.authoremail
+      "authoremail": this.authoremail,
+      "badges": this.badges
     });
   },
 
   default: { // if the method name doesn't match a priority, it will be pushed to this group
-    method: () => {console.log('just ran default')}
   },
 
   writing: function () { // write the generator specific files (routes, controllers, etc)
@@ -151,7 +167,6 @@ module.exports = generators.Base.extend({
   },
   
   conficts: { // where conflicts are handled (used internally)
-    method: () => {console.log('just ran conflics')}
   },
 
   install: function () { // where installation are run (npm, bower)
@@ -177,6 +192,5 @@ module.exports = generators.Base.extend({
   },
   
   end: { // called last, cleanup, say good bye, etc
-    method: () => {console.log('just ran end')}
   },
 });
