@@ -1,6 +1,6 @@
 {
-  "name": "generator-node-module",
-  "version": "0.1.0",
+  "name": "generator-node-package",
+  "version": "0.1.1",
   "description": "Yeoman nodejs module generator",
   "scripts": {
     "commit": "git-cz",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ercpereda/generator-node-module.git"
+    "url": "git+https://github.com/ercpereda/generator-node-package.git"
   },
   "keywords": [
     "yeoman",
@@ -24,9 +24,9 @@
   "author": "Ernesto R. C. Pereda <ercp42@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ercpereda/generator-node-module/issues"
+    "url": "https://github.com/ercpereda/generator-node-package/issues"
   },
-  "homepage": "https://github.com/ercpereda/generator-node-module#readme",
+  "homepage": "https://github.com/ercpereda/generator-node-package#readme",
   "dependencies": {
     "yeoman-generator": "0.24.1"
   },
