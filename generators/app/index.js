@@ -160,6 +160,12 @@ module.exports = generators.Base.extend({
     );
 
     this.fs.copyTpl(
+      this.templatePath('.eslintrc.json'),
+      this.destinationPath('.eslintrc.json'),
+      config
+    );
+
+    this.fs.copyTpl(
       this.templatePath('src'),
       this.destinationPath('src'),
       config
@@ -180,6 +186,8 @@ module.exports = generators.Base.extend({
       'codecov',
       'commitizen',
       'cz-conventional-changelog',
+      'eslint',
+      'eslint-config-defaults',
       'ghooks',
       'json-loader',
       'mocha',

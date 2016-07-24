@@ -9,6 +9,7 @@
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "watch:test": "npm test -- -w",
     "test": "mocha src/index.spec.js --compilers js:babel-register",
+    "linter": "eslint src/**/*.js",
     "cover": "nyc npm test",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
@@ -41,7 +42,7 @@
       "path": "node_modules/cz-conventional-changelog"
     },
     "ghooks": {
-      "pre-commit": "npm run cover && npm run check-coverage"
+      "pre-commit": "npm run linter && npm run cover && npm run check-coverage"
     }
   },
   "nyc": {
