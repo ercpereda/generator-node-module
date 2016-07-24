@@ -22,11 +22,6 @@
     "url": "git+https://github.com/<%= githubuser %>/<%= appname %>.git"
   },
   "keywords": [
-    "random",
-    "rp1",
-    "ready",
-    "player",
-    "one"
   ],
   "files": [
     "dist"

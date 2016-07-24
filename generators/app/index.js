@@ -79,20 +79,80 @@ module.exports = generators.Base.extend({
         default: this.authoremail
       }, {
         type: 'checkbox',
+        name: 'eslintDefaults',
+        message: 'Select eslint defaults',
+        choices: [
+          { 
+            name: 'The config recommended by ESLint',
+            value: 'defaults/configurations/eslint',
+            checked: true
+          }, {
+            name: 'The Google JavaScript Style Guide',
+            value: 'defaults/configurations/google',
+            checked: true
+          }, {
+            name: 'The Gulp ESLint config',
+            value: 'defaults/configurations/gulp'
+          }, {
+            name: 'The config used for the Node.js runtime',
+            value: 'defaults/configurations/node-runtime'
+          }, {
+            name: 'ES5 config from the AirBnB Style Guide',
+            value: 'defaults/configurations/airbnb/es5'
+          }, {
+            name: 'ES6 config from the AirBnB Style Guide',
+            value: 'defaults/configurations/airbnb/es6'
+          },  {
+            name: 'React config from the AirBnB Style Guide',
+            value: 'defaults/configurations/airbnb/es6-react'
+          }, {
+            name: 'ES5 Walmart config',
+            value: 'defaults/configurations/walmart/es5'
+          }, {
+            name: 'Walmart ES5 + browser',
+            value: 'defaults/configurations/walmart/es5-browser'
+          }, {
+            name: 'Walmart ES5 + node < 4.x',
+            value: 'defaults/configurations/walmart/es5-node'
+          }, {
+            name: 'Walmart ES5 + test',
+            value: 'defaults/configurations/walmart/es5-test'
+          }, {
+            name: 'ES6 Walmart config',
+            value: 'defaults/configurations/walmart/es6'
+          }, {
+            name: 'Walmart ES6 + browser',
+            value: 'defaults/configurations/walmart/es6-browser'
+          }, {
+            name: 'Walmart ES6 + node < 4.x',
+            value: 'defaults/configurations/walmart/es6-node'
+          }, {
+            name: 'Walmart ES6 + test',
+            value: 'defaults/configurations/walmart/es6-test'
+          }, {
+            name: 'Walmart ES6 + react',
+            value: 'defaults/configurations/walmart/es6-react'
+          }, {
+            name: 'Walmart ES6 + react + test',
+            value: 'defaults/configurations/walmart/es6-react-test'
+          }, 
+        ]
+      }, {
+        type: 'checkbox',
         name: 'badges',
         message: 'Badges',
         choices: [
-          {name: 'npm downloads', value: 'npmd'},
-          {name: 'npm version', value: 'npmv'},
-          {name: 'npm license', value: 'npml'},
-          {name: 'travis build', value: 'travis-build'},
-          {name: 'codecov coverage', value: 'codecov'},
+          {name: 'npm version', value: 'npmv', checked: true},
+          {name: 'npm license', value: 'npml', checked: true},
+          {name: 'npm downloads', value: 'npmd', checked: true},
+          {name: 'travis build', value: 'travis-build', checked: true},
+          {name: 'codecov coverage', value: 'codecov', checked: true},
           {name: 'github fork', value: 'gforks'},
           {name: 'github stars', value: 'gstars'},
           {name: 'github watchers', value: 'gwatchers'},
           {name: 'github followers', value: 'gfollowers'},
         ]
-      }
+      } 
     ]).then(function (answers) {
       this.appname = answers.appname;
       this.description = answers.description;
@@ -101,6 +161,7 @@ module.exports = generators.Base.extend({
       this.githubuser = answers.githubuser;
       this.authorname = answers.authorname;
       this.authoremail = answers.authoremail;
+      this.eslintDefaults = answers.eslintDefaults;
       this.badges = answers.badges;
     }.bind(this));
   },
@@ -114,6 +175,7 @@ module.exports = generators.Base.extend({
       "githubuser": this.githubuser,
       "authorname": this.authorname,
       "authoremail": this.authoremail,
+      "eslintDefaults": this.eslintDefaults,
       "badges": this.badges
     });
   },
@@ -160,8 +222,8 @@ module.exports = generators.Base.extend({
     );
 
     this.fs.copyTpl(
-      this.templatePath('.eslintrc.json'),
-      this.destinationPath('.eslintrc.json'),
+      this.templatePath('.eslintrc.js'),
+      this.destinationPath('.eslintrc.js'),
       config
     );
 
@@ -197,6 +259,29 @@ module.exports = generators.Base.extend({
       'webpack'
     ], 
     { 'saveDev': true });
+
+    // eslint dependencies
+    const installEslintPluginReact = this.eslintDefaults.filter((value) => {
+      return /-react/.test(value);
+    }).length > 0;
+    if (installEslintPluginReact) {
+      this.npmInstall(['eslint-plugin-react', 'babel-eslint'], {'saveDev': true});  
+    }
+    else {
+      const installBabelEslint = this.eslintDefaults.filter((value) => {
+        return /es6/.test(value);
+      }).length > 0;
+      if (installBabelEslint) {
+        this.npmInstall(['babel-eslint'], {'saveDev': true});  
+      }
+    }
+
+    const installEslintPluginFilenames = this.eslintDefaults.filter((value) => {
+      return /walmart/.test(value);
+    }).length > 0;
+    if (installEslintPluginFilenames) {
+      this.npmInstall(['eslint-plugin-filenames'], {'saveDev': true});  
+    }
   },
   
   end: { // called last, cleanup, say good bye, etc

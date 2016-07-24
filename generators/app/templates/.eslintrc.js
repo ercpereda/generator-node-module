@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "parserOptions": {
     "ecmaVersion": 6,
@@ -13,8 +13,8 @@
     "es6": true
   },
   "extends": [
-    "defaults", 
-    "defaults/configurations/google"
+    <% eslintDefaults.forEach(function (value) { %>"<%= value %>",
+    <% }); %>
   ],
   "rules": {
   }
