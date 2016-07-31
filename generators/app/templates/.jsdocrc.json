@@ -1,0 +1,20 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": ["./src"],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": ".+\\.spec\\.js$"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {},
+  "opts": {
+    "recurse": true,
+    "encoding": "utf8",
+    "destination": "./doc/",
+    "package": "./package.json",
+    "readme": "./README.md"
+  }
+}

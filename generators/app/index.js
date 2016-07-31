@@ -228,6 +228,12 @@ module.exports = generators.Base.extend({
     );
 
     this.fs.copyTpl(
+      this.templatePath('.jsdocrc.json'),
+      this.destinationPath('.jsdocrc.json'),
+      config
+    );
+
+    this.fs.copyTpl(
       this.templatePath('src'),
       this.destinationPath('src'),
       config
@@ -251,6 +257,7 @@ module.exports = generators.Base.extend({
       'eslint',
       'eslint-config-defaults',
       'ghooks',
+      'jsdoc',
       'json-loader',
       'mocha',
       'npm-run-all',

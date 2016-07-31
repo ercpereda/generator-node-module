@@ -10,6 +10,7 @@
     "watch:test": "npm test -- -w",
     "test": "mocha src/index.spec.js --compilers js:babel-register",
     "linter": "eslint src/**/*.js",
+    "jsdoc": "jsdoc -c .jsdocrc.json",
     "cover": "nyc npm test",
     "prebuild": "rimraf dist",
     "build": "npm-run-all --parallel build:*",
