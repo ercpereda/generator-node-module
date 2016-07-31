@@ -38,7 +38,6 @@ module.exports = generators.Base.extend({
   },
 
   initializing: { // initialization methods (checking current project state, getting configs, etc)
-    method: () => {console.log('just ran initializing')}
   },
 
   prompting: function () { // prompt users for options
@@ -184,7 +183,8 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () { // write the generator specific files (routes, controllers, etc)
-    const config = this.config.getAll();
+    let config = this.config.getAll(); 
+    config.appnameCamelCased = this.appname.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 
     this.fs.copyTpl(
       this.templatePath('package.json'),

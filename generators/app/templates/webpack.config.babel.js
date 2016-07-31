@@ -7,7 +7,7 @@ export default {
   output: {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: '<%= appname %>'
+    library: '<%= appnameCamelCased %>'
   },
   devTool: 'source-map',
   module: {
