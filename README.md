@@ -18,3 +18,4 @@ $ npm install -g yo generator-node-package
 * Eslint
 * Code Coverage
 * Badges
+* Jsdoc
