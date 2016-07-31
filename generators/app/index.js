@@ -244,6 +244,7 @@ module.exports = generators.Base.extend({
   },
 
   install: function () { // where installation are run (npm, bower)
+    this.log('Installing dependencies...');
     this.npmInstall([
       'babel-cli',
       'babel-loader',
