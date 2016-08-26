@@ -8,7 +8,14 @@
     "includePattern": ".+\\.js(doc)?$",
     "excludePattern": ".+\\.spec\\.js$"
   },
-  "plugins": ["plugins/markdown"],
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/jsdoc-babel"]
+  ],
+  "babel": {
+    "extensions": ["js", "es6"],
+    "presets": ["es2015", "stage-3"]
+  },
   "templates": {},
   "opts": {
     "recurse": true,
