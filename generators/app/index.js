@@ -252,6 +252,7 @@ module.exports = generators.Base.extend({
       'babel-preset-es2015',
       'babel-preset-stage-2',
       'babel-register',
+      'babel-eslint',
       'chai',
       'codecov',
       'commitizen',
