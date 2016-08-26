@@ -246,11 +246,15 @@ module.exports = generators.Base.extend({
   install: function () { // where installation are run (npm, bower)
     this.log('Installing dependencies...');
     this.npmInstall([
+      'babel-plugin-transform-runtime'
+    ], 
+    { 'save': true });
+    this.npmInstall([
       'jsdoc-babel',
       'babel-cli',
       'babel-loader',
       'babel-preset-es2015',
-      'babel-preset-stage-2',
+      'babel-preset-stage-3',
       'babel-register',
       'babel-eslint',
       'chai',
